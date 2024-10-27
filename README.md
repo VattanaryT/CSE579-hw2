@@ -1,6 +1,7 @@
 # Homework-2
 
 ## Setup and Installation
+[Colab notebook](https://colab.research.google.com/drive/1PmagnEr-OOMuIzNr25csAumyJ3Z6UpLQ?authuser=4)
 
 ### Install MuJoCo
 
