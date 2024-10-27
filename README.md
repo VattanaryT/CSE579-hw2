@@ -2,7 +2,7 @@
 
 ## Setup and Installation
 [Colab notebook](https://colab.research.google.com/drive/1PmagnEr-OOMuIzNr25csAumyJ3Z6UpLQ?authuser=4)
-
+[Course Website including writeup](https://courses.cs.washington.edu/courses/cse579/24au/projects/homework2/)
 ### Install MuJoCo
 
 1. Download the MuJoCo version 2.1 binaries for
