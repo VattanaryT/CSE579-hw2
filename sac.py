@@ -39,7 +39,8 @@ class SACAgent(GenericACAgent):
 
         
         # Hint step 3:
-        # Sample the current Q1 and Q2 values of the current state using the critic. The loss is mse(Q1, targetQ) + mse(Q2 + target Q)
+        # Sample the current Q1 and Q2 values of the current state using the critic, and regress onto the target Q.
+        # The loss is mse(Q1, targetQ) + mse(Q2 + target Q)
 
         
         #========== TODO: end ==========
