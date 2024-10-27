@@ -34,8 +34,9 @@ class SACAgent(GenericACAgent):
         # below in update_actor as a reference on how to do this
         
         # Hint step 2: Sample the two target Q values from the critic_target using next_obs and the sampled next_action. 
-        # Take these numbers, and get the target value by taking the min of the 2 q values and then subtracting self.alpha*log_prob
+        # Calculate the target value by taking the min of the values and then subtracting self.alpha * log_prob
         # The target Q is the reward + (not_done_no_max * discount * target_value)
+
         
         # Hint step 3:
         # Sample the current Q1 and Q2 values of the current state using the critic. The loss is mse(Q1, targetQ) + mse(Q2 + target Q)
