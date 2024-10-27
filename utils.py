@@ -29,7 +29,7 @@ def mlp(input_dim, hidden_dim, output_dim, hidden_depth, output_mod=None):
 
 
 def weight_init(m):
-    """Custom weight init for Conv2D and Linear layers."""
+    """Custom weight init for Linear layers."""
     if isinstance(m, nn.Linear):
         nn.init.orthogonal_(m.weight.data)
         if hasattr(m.bias, 'data'):
