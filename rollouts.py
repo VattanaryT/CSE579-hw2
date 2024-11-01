@@ -90,7 +90,7 @@ def evaluate(env, policy, num_validation_runs=10, render=False):
             env,
             policy,
             render=render)
-        if env.spec.id == 'HalfCheetah-v5':
+        if env.spec.id == 'Ant-v5':
             success = np.sum(path['rewards']) > 0
         elif env.spec.id == 'InvertedPendulum-v5':
             success = len(path['dones']) == env.spec.max_episode_steps
