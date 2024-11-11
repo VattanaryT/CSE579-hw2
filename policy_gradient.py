@@ -58,9 +58,8 @@ def train_model(policy, baseline, trajs, policy_optim, baseline_optim, device, g
     baseline_pred = baseline(torch.from_numpy(states).float().to(device))
     #========== TODO: start ==========
     # Train policy by optimizing surrogate objective: -log prob * (return - baseline)
+    # Return is computed above, as well as log_probs and baselines.
     # Hint: Policy gradient is given by: \grad log prob(a|s)* (return - baseline)
-    # Hint: Return is computed above, you can computer log_probs using the log_density function imported.
-    # Hint: You can predict what the baseline outputs for every state.
     # Hint: Then simply compute the surrogate objective by taking the objective as -log prob * (return - baseline)
     # Hint: You can then use standard pytorch machinery to take *one* gradient step on the policy
 
