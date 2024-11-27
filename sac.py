@@ -11,6 +11,14 @@ class SACAgent(GenericACAgent):
         # Get the two Q values from the double Q function critic and take the minimum value. Then calculate the actor loss which
         # is defined by self.alpha * log_prob - actor_Q. Make sure that gradient does not flow through the alpha paramater. 
 
+        actor_distribution = self.actor(obs)
+        actions = actor_distribution.rsample()
+        log_prob = actor_distribution.log_prob(actions).sum(-1, keepdim=True)
+
+        q1, q2 = self.critic(obs, actions)
+        actor_Q = torch.min(q1, q2)
+
+        actor_loss = (self.alpha.detach() * log_prob - actor_Q).mean()
         
         #========== TODO: end ==========
         # optimize the actor
@@ -37,6 +45,24 @@ class SACAgent(GenericACAgent):
         # Calculate the target value by taking the min of the values and then subtracting self.alpha * log_prob
         # The target Q is the reward + (not_done_no_max * discount * target_value)
 
+        next_action_dist = self.actor(next_obs)
+        next_action = next_action_dist.rsample()
+        next_log_prob = next_action_dist.log_prob(next_action).sum(-1, keepdim=True)
+
+        # Hint step 2: Sample the two target Q values from the critic_target using next_obs and the sampled next_action.
+        # Take these numbers, and get the target value by taking the min of the 2 q values and then subtracting self.alpha*log_prob
+        # The target Q is the reward + (not_done_no_max * discount * target_value)
+
+        with torch.no_grad():
+            target_Q1, target_Q2 = self.critic_target(next_obs, next_action)
+            target_V = torch.min(target_Q1, target_Q2) - self.alpha.detach() * next_log_prob
+            target_Q = reward + (not_done_no_max * self.discount * target_V)
+
+        # Hint step 3:
+        # Sample the current Q1 and Q2 values of the current state using the critic. The loss is mse(Q1, targetQ) + mse(Q2 + target Q)
+
+        current_Q1, current_Q2 = self.critic(obs, action)
+        critic_loss = (torch.nn.functional.mse_loss(current_Q1, target_Q)) + (torch.nn.functional.mse_loss(current_Q2, target_Q))
         
         # Hint step 3:
         # Sample the current Q1 and Q2 values of the current state using the critic, and regress onto the target Q.
