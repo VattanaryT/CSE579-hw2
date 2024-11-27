@@ -72,6 +72,8 @@ class SACAgent(GenericACAgent):
         #========== TODO: end ==========
         # Optimize the critic
         self.critic_optimizer.zero_grad()
+        print("Critic Loss:", critic_loss)
+
         critic_loss.backward()
         self.critic_optimizer.step()
 
