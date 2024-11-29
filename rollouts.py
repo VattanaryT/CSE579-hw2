@@ -82,6 +82,7 @@ def rollout(
 
 
 def evaluate(env, policy, num_validation_runs=10, render=False):
+    success = False
     success_count = 0
     rewards_suc = 0
     rewards_all = 0
