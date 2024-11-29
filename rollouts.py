@@ -82,7 +82,7 @@ def rollout(
 
 
 def evaluate(env, policy, num_validation_runs=10, render=False):
-    success = False
+    success = 0
     success_count = 0
     rewards_suc = 0
     rewards_all = 0
@@ -97,6 +97,7 @@ def evaluate(env, policy, num_validation_runs=10, render=False):
             success = len(path['dones']) == env.spec.max_episode_steps
 
         if success:
+            # comment
             success_count += 1
             rewards_suc += np.sum(path['rewards'])
         rewards_all += np.sum(path['rewards'])
